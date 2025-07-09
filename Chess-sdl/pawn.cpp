@@ -32,27 +32,36 @@ const std::vector<square*> pawn::get_possible_moves(const int x, const int y, sq
 {
 	std::vector<square*> possible_moves;
 
+	int square_in_front;
+	int to_squares_in_front;
+
 	if (color_ == color::white)
 	{
-
+		square_in_front = y + 1;
+		to_squares_in_front = y + 2;
+	}
+	else
+	{
+		square_in_front = y - 1;
+		to_squares_in_front = y - 2;
 	}
 
-	if (!board[x][y + 1]->get_piece()) {
-		possible_moves.push_back(board[x][y + 1]);
+	if (!board[x][square_in_front]->get_piece()) {
+		possible_moves.push_back(board[x][square_in_front]);
 		if (has_moved()) {
-			if (!board[x][y + 2]->get_piece()) {
-				possible_moves.push_back(board[x][y + 2]);
+			if (!board[x][to_squares_in_front]->get_piece()) {
+				possible_moves.push_back(board[x][to_squares_in_front]);
 			}
 		}
 	}
 
-	if (board[x + 1][y + 1]->get_piece()->get_color() == color::black)
+	if (board[x + 1][square_in_front]->get_piece()->get_color() == color::black)
 	{
-		possible_moves.push_back(board[x + 1][y + 1]);
+		possible_moves.push_back(board[x + 1][square_in_front]);
 	}
-	if (board[x - 1][y + 1]->get_piece()->get_color() == color::white)
+	if (board[x - 1][square_in_front]->get_piece()->get_color() == color::white)
 	{
-		possible_moves.push_back(board[x - 1][y + 1]);
+		possible_moves.push_back(board[x - 1][square_in_front]);
 	}
 
 
