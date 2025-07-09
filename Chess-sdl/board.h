@@ -2,9 +2,12 @@
 
 #include "SDL3/SDL.h"
 #include <stdexcept>
+#include <vector>
 
 #include "display.h"
 #include "square.h"
+
+class square;
 
 class board
 {
@@ -32,5 +35,7 @@ public:
 
 	void setup_squares();
 	void setup_pieces();
+
+	std::vector<square*> get_possible_moves(const int x, const int y) const;
 };
 
