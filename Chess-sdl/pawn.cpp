@@ -1,19 +1,18 @@
 #include "pawn.h"
 
-#include "square.h"
+#include <iostream>
 
 pawn::pawn(color color)
 	: piece(color, color == color::white ? 1 : -1)
 {
 	if (color == color::white)
 	{
-		texture_path_ = "./assets/White Pieces/spr_pawn_white.png";
+		texture_path_ = white_pawn_texture;
 	}
 	else
 	{
-		texture_path_ = "./assets/Black Pieces/spr_pawn_black.png";
+		texture_path_ = black_pawn_texture;
 	}
-	render_texture();
 }
 
 const char* pawn::to_string()
@@ -28,42 +27,45 @@ const char* pawn::to_string()
 	}
 }
 
-const std::vector<square*> pawn::get_possible_moves(const int x, const int y, square* const board[7][7]) const
+const std::vector<square*> pawn::get_possible_moves(const int x, const int y, square* const board[8][8]) const
 {
 	std::vector<square*> possible_moves;
 
 	int square_in_front;
-	int to_squares_in_front;
+	int two_squares_in_front;
 
 	if (color_ == color::white)
 	{
 		square_in_front = y + 1;
-		to_squares_in_front = y + 2;
+		two_squares_in_front = y + 2;
 	}
 	else
 	{
 		square_in_front = y - 1;
-		to_squares_in_front = y - 2;
+		two_squares_in_front = y - 2;
 	}
 
 	if (!board[x][square_in_front]->get_piece()) {
 		possible_moves.push_back(board[x][square_in_front]);
 		if (has_moved()) {
-			if (!board[x][to_squares_in_front]->get_piece()) {
-				possible_moves.push_back(board[x][to_squares_in_front]);
+			if (!board[x][two_squares_in_front]->get_piece()) {
+				possible_moves.push_back(board[x][two_squares_in_front]);
 			}
 		}
 	}
-
-	if (board[x + 1][square_in_front]->get_piece()->get_color() == color::black)
-	{
-		possible_moves.push_back(board[x + 1][square_in_front]);
+	if (board[x + 1][square_in_front]->get_piece()) {
+		if (board[x + 1][square_in_front]->get_piece()->get_color() == color::black)
+		{
+			possible_moves.push_back(board[x + 1][square_in_front]);
+		}
 	}
-	if (board[x - 1][square_in_front]->get_piece()->get_color() == color::white)
-	{
-		possible_moves.push_back(board[x - 1][square_in_front]);
-	}
+	if (board[x - 1][square_in_front]->get_piece()) {
 
+		if (board[x - 1][square_in_front]->get_piece()->get_color() == color::white)
+		{
+			possible_moves.push_back(board[x - 1][square_in_front]);
+		}
+	}
 
 	return possible_moves;
 }

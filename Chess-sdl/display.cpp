@@ -21,7 +21,7 @@ display::display()
 	}
 
 	// Check that the display was successfully created
-	if (window_ == NULL)
+	if (window_ == nullptr)
 	{
 		// In the case that the display could not be made...
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not create display: %s\n", SDL_GetError());
@@ -38,7 +38,7 @@ display::~display()
 	SDL_Quit();
 }
 
-SDL_Renderer* display::get_renderer()
+SDL_Renderer* display::get_renderer() const
 {
 	return renderer_;
 }

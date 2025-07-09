@@ -24,7 +24,7 @@ public:
 	display(display& other) = delete;
 	void operator=(const display&) = delete;
 
-	SDL_Renderer* get_renderer();
+	SDL_Renderer* get_renderer() const;
 
 	SDL_Texture* load_texture(const char* path) const;
 };

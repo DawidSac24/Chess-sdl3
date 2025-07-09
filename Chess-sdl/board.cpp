@@ -4,7 +4,6 @@
 
 board::board()
 {
-	render_texture();
 	setup_squares();
 	setup_pieces();
 	SDL_Log("board initialized");
@@ -19,9 +18,7 @@ void board::render_texture()
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "loading board texture failed!");
 	}
 
-	SDL_RenderClear(display_->get_renderer());
-	const bool result = SDL_RenderTexture(display_->get_renderer(), texture_, nullptr, &dest_rect_);
-	SDL_RenderPresent(display_->get_renderer());
+	const bool result = SDL_RenderTexture(display_->get_renderer(), texture_, nullptr, &rect_);
 
 	if (!result)
 	{
@@ -34,7 +31,6 @@ square* board::get_square(const int x, const int y) const
 	if (x > size || x < 0 || y > size || y < 0)
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "square request out of bounds\n");
-		throw std::invalid_argument("square request out of bounds");
 	}
 
 	return board_[x][y];
@@ -55,6 +51,11 @@ void board::setup_pieces()
 {
 	for (int i = 0; i < size; ++i)
 	{
+		board_[i][1]->set_piece(std::make_unique<pawn>(color::white));
+	}
+	for (int i = 0; i < size; ++i)
+	{
+		board_[i][6]->set_piece(std::make_unique<pawn>(color::black));
 	}
 }
 
@@ -72,4 +73,22 @@ std::vector<square*> board::get_possible_moves(const int x, const int y) const
 	}
 
 	return board_[x][y]->get_piece()->get_possible_moves(x, y, board_);
+}
+
+void board::move_piece(const int src_x, const int src_y, const int dest_x, const int dest_y)
+{
+	board_[dest_x][dest_y]->move_piece_from(*board_[src_x][src_y]);
+}
+
+void board::render_all_textures()
+{
+	render_texture();
+
+	for (int i = 0; i < size; ++i)
+	{
+		for (int j = 0; j < size; ++j)
+		{
+			board_[i][j]->render_texture();
+		}
+	}
 }

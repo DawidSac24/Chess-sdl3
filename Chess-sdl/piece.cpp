@@ -5,7 +5,7 @@ piece::piece(const color color, const int value) :
 {
 }
 
-void piece::render_texture()
+SDL_Texture* piece::get_texture()
 {
 	if (texture_ == nullptr)
 	{
@@ -22,4 +22,5 @@ void piece::render_texture()
 			SDL_LogError(SDL_LOG_CATEGORY_ERROR, "loading texture failed for: %s", this->to_string());
 		}
 	}
+	return texture_;
 }

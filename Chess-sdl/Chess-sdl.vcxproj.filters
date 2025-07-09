@@ -65,6 +65,9 @@
     <ClInclude Include="pawn.h">
       <Filter>Header Files\pieces</Filter>
     </ClInclude>
+    <ClInclude Include="texture_paths.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Board\chessboard.png">

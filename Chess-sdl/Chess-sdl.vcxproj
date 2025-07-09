@@ -166,6 +166,7 @@
     <ClInclude Include="pawn.h" />
     <ClInclude Include="piece.h" />
     <ClInclude Include="square.h" />
+    <ClInclude Include="texture_paths.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
