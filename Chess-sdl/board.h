@@ -28,19 +28,21 @@ private:
 	SDL_Texture* texture_;
 	SDL_FRect rect_ = { x_,y_, height_, width_ };
 	const char* texture_path_ = board_texture;
+
 	void render_board_texture();
+
+	void setup_squares();
+	void setup_pieces();
 public:
 	board();
 	~board();
 
 	square* get_square(const int x, const int y) const;
-	square* get_selected_sqr() const { return selected_square_; };
+	square* get_selected_sqr() const { return selected_square_; }
+	void unselect_square() { selected_square_ = nullptr; }
 	SDL_FRect* get_rect() { return &rect_; }
 
 	void render_all_textures();
-
-	void setup_squares();
-	void setup_pieces();
 
 	std::vector<square*> get_possible_moves(const int x, const int y) const;
 	bool select_src_sqr(const int x, const int y);

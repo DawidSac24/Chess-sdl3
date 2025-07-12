@@ -18,7 +18,8 @@ public:
 
 	int get_x() const { return x_; }
 	int get_y() const { return y_; }
-	std::unique_ptr<piece>& get_piece() { return piece_; }
+	piece* get_piece() const { return piece_.get(); }
+
 
 	bool render_texture() const;
 

@@ -34,6 +34,7 @@ public:
 
 	void lunch_game();
 	void handle_event(const SDL_Event& event);
+	void handle_piece_movement(const int x, const int y);
 
 	void render_all_textures();
 };

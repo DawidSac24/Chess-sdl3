@@ -41,7 +41,13 @@ square* board::get_square(const int x, const int y) const
 	if (x > size || x < 0 || y > size || y < 0)
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "square request out of bounds\n");
+		return nullptr;
 	}
+	if (!board_[x][y]) {
+		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "board_[%d][%d] is nullptr\n", x, y);
+		return nullptr;
+	}
+
 
 	return board_[x][y];
 }
@@ -59,9 +65,14 @@ void board::render_all_textures()
 	}
 	if (selected_square_)
 	{
-		show_possible_moves(get_possible_moves(selected_square_->get_x(), selected_square_->get_y()));
-	}
+		SDL_SetRenderDrawBlendMode(display_->get_renderer(), SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawColor(display_->get_renderer(), 255, 255, 0, 128); // Semi-transparent yellow
 
+		show_possible_moves(get_possible_moves(selected_square_->get_x(), selected_square_->get_y()));
+
+		SDL_SetRenderDrawColor(display_->get_renderer(), 0, 0, 0, 0);
+		SDL_SetRenderDrawBlendMode(display_->get_renderer(), SDL_BLENDMODE_NONE);
+	}
 }
 
 void board::setup_squares()
@@ -105,9 +116,9 @@ std::vector<square*> board::get_possible_moves(const int x, const int y) const
 
 bool board::select_src_sqr(const int x, const int y)
 {
-	square* selected_square = board_[x][y];
+	square* selected_square = get_square(x, y);
 
-	if (selected_square->get_piece())
+	if (selected_square && selected_square->get_piece())
 	{
 		selected_square_ = selected_square;
 		return true;
@@ -150,10 +161,8 @@ void board::show_possible_moves(const std::vector<square*> squares) const
 		const float x = static_cast<float>(square->get_x());
 		const float y = static_cast<float>(square->get_y());
 
-		SDL_FRect rect = { x * square_size_ + 248, y * square_size_ + 88, square_size_, square_size_ };
+		SDL_FRect rect = { x * square_size_ + 256, y * square_size_ + 96, square_size_, square_size_ };
 
-		SDL_SetRenderDrawColor(display_->get_renderer(), 255, 255, 0, 255); // Yellow
-
-		SDL_RenderRect(display_->get_renderer(), &rect);
+		SDL_RenderFillRect(display_->get_renderer(), &rect);
 	}
 }

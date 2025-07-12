@@ -27,6 +27,7 @@ public:
 	color get_color() const { return color_; }
 	int get_value() const { return value_; }
 	bool has_moved() const { return has_moved_flag_; }
+	void set_has_moved() { has_moved_flag_ = true; }
 	SDL_Texture* get_texture();
 
 	virtual const char* to_string() = 0;

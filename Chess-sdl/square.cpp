@@ -26,6 +26,6 @@ void square::move_piece_from(square& dest)
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "No pieces found in the src coordinates\n");
 		throw std::exception("No pieces found in the src coordinates\n");
 	}
-
+	dest.piece_->set_has_moved();
 	piece_ = std::move(dest.piece_);
 }

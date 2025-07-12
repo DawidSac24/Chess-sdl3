@@ -35,23 +35,30 @@ void game::handle_event(const SDL_Event& event)
 			x = (x - (board_rect_->x + 8)) / square_size_;
 			y = (y - (board_rect_->y + 8)) / square_size_;
 
-			square* selected_square = board_.get_selected_sqr();
+			handle_piece_movement(x, y);
 
-			if (!selected_square)
-			{
-				if (!board_.select_src_sqr(x, y))
-				{
-					std::cout << "failed to select piece";
-				}
-			}
-			else
-			{
-				if (!board_.select_dst_sqr(x, y))
-				{
-					std::cout << "failed to move piece";
-				}
-			}
 			render_all_textures();
+		}
+	}
+}
+
+void game::handle_piece_movement(const int x, const int y)
+{
+	const square* selected_square = board_.get_selected_sqr();
+
+	if (!selected_square)
+	{
+		if (!board_.select_src_sqr(x, y))
+		{
+			std::cout << "failed to select piece";
+		}
+	}
+	else
+	{
+		if (!board_.select_dst_sqr(x, y))
+		{
+			std::cout << "failed to move piece";
+			board_.unselect_square();
 		}
 	}
 }

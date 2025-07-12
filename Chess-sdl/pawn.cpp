@@ -47,21 +47,21 @@ const std::vector<square*> pawn::get_possible_moves(const int x, const int y, sq
 
 	if (!board[x][square_in_front]->get_piece()) {
 		possible_moves.push_back(board[x][square_in_front]);
-		if (has_moved()) {
+		if (!has_moved()) {
 			if (!board[x][two_squares_in_front]->get_piece()) {
 				possible_moves.push_back(board[x][two_squares_in_front]);
 			}
 		}
 	}
 	if (board[x + 1][square_in_front]->get_piece()) {
-		if (board[x + 1][square_in_front]->get_piece()->get_color() == color::black)
+		if (board[x + 1][square_in_front]->get_piece()->get_color() != board[x][y]->get_piece()->get_color())
 		{
 			possible_moves.push_back(board[x + 1][square_in_front]);
 		}
 	}
 	if (board[x - 1][square_in_front]->get_piece()) {
 
-		if (board[x - 1][square_in_front]->get_piece()->get_color() == color::white)
+		if (board[x - 1][square_in_front]->get_piece()->get_color() != board[x][y]->get_piece()->get_color())
 		{
 			possible_moves.push_back(board[x - 1][square_in_front]);
 		}
