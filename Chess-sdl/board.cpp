@@ -9,7 +9,17 @@ board::board()
 	SDL_Log("board initialized");
 }
 
-void board::render_texture()
+board::~board()
+{
+	for (int i = 0; i < size; ++i) {
+		for (int j = 0; j < size; ++j) {
+			delete board_[i][j];
+		}
+	}
+}
+
+
+void board::render_board_texture()
 {
 	texture_ = display_->load_texture(texture_path_);
 
@@ -36,6 +46,24 @@ square* board::get_square(const int x, const int y) const
 	return board_[x][y];
 }
 
+void board::render_all_textures()
+{
+	render_board_texture();
+
+	for (int i = 0; i < size; ++i)
+	{
+		for (int j = 0; j < size; ++j)
+		{
+			board_[i][j]->render_texture();
+		}
+	}
+	if (selected_square_)
+	{
+		show_possible_moves(get_possible_moves(selected_square_->get_x(), selected_square_->get_y()));
+	}
+
+}
+
 void board::setup_squares()
 {
 	for (int i = 0; i < size; i++)
@@ -51,11 +79,11 @@ void board::setup_pieces()
 {
 	for (int i = 0; i < size; ++i)
 	{
-		board_[i][1]->set_piece(std::make_unique<pawn>(color::white));
+		board_[i][6]->set_piece(std::make_unique<pawn>(color::white));
 	}
 	for (int i = 0; i < size; ++i)
 	{
-		board_[i][6]->set_piece(std::make_unique<pawn>(color::black));
+		board_[i][1]->set_piece(std::make_unique<pawn>(color::black));
 	}
 }
 
@@ -75,20 +103,57 @@ std::vector<square*> board::get_possible_moves(const int x, const int y) const
 	return board_[x][y]->get_piece()->get_possible_moves(x, y, board_);
 }
 
-void board::move_piece(const int src_x, const int src_y, const int dest_x, const int dest_y)
+bool board::select_src_sqr(const int x, const int y)
 {
-	board_[dest_x][dest_y]->move_piece_from(*board_[src_x][src_y]);
+	square* selected_square = board_[x][y];
+
+	if (selected_square->get_piece())
+	{
+		selected_square_ = selected_square;
+		return true;
+	}
+	return false;
 }
 
-void board::render_all_textures()
+bool board::select_dst_sqr(const int x, const int y)
 {
-	render_texture();
-
-	for (int i = 0; i < size; ++i)
+	if (move_piece(selected_square_->get_x(), selected_square_->get_y(), x, y))
 	{
-		for (int j = 0; j < size; ++j)
+		selected_square_ = nullptr;
+		return true;
+	}
+
+	return false;
+}
+
+bool board::move_piece(const int src_x, const int src_y, const int dest_x, const int dest_y) const
+{
+	const std::vector<square*> possible_moves = get_possible_moves(src_x, src_y);
+
+	const square* dest_square = get_square(dest_x, dest_y);
+
+	for (const square* square : possible_moves)
+	{
+		if (square == dest_square)
 		{
-			board_[i][j]->render_texture();
+			board_[dest_x][dest_y]->move_piece_from(*board_[src_x][src_y]);
+			return true;
 		}
+	}
+	return false;
+}
+
+void board::show_possible_moves(const std::vector<square*> squares) const
+{
+	for (const square* square : squares)
+	{
+		const float x = static_cast<float>(square->get_x());
+		const float y = static_cast<float>(square->get_y());
+
+		SDL_FRect rect = { x * square_size_ + 248, y * square_size_ + 88, square_size_, square_size_ };
+
+		SDL_SetRenderDrawColor(display_->get_renderer(), 255, 255, 0, 255); // Yellow
+
+		SDL_RenderRect(display_->get_renderer(), &rect);
 	}
 }

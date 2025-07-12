@@ -1,5 +1,7 @@
 #include "display.h"
 
+#include "square.h"
+
 display* display::instance_ = nullptr;
 
 display* display::get_instance()
@@ -60,3 +62,4 @@ SDL_Texture* display::load_texture(const char* path) const
 
 	return texture;
 }
+

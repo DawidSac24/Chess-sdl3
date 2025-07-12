@@ -1,5 +1,4 @@
 #pragma once
-
 #include "piece.h"
 #include "square.h"
 #include "texture_paths.h"

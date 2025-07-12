@@ -1,7 +1,6 @@
 #pragma once
-
-#include "board.h"
 #include "display.h"
+#include "board.h"
 
 enum game_state
 {
@@ -20,16 +19,13 @@ private:
 	board board_;
 	SDL_FRect* board_rect_;
 
-	square* selected_square_ = nullptr;
-	const float square_size = 96;
+	float square_size_ = 96;
 
 	display* display_ = display::get_instance();
 
 	game();
 public:
 	static game* get_instance();
-
-	~game();
 
 	explicit game(display& other) = delete;
 	void operator=(const game&) = delete;
@@ -40,6 +36,4 @@ public:
 	void handle_event(const SDL_Event& event);
 
 	void render_all_textures();
-
-	bool move_piece(const int src_x, const int src_y, const int dest_x, const int dest_y);
 };

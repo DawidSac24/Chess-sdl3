@@ -1,9 +1,7 @@
 #pragma once
-
 #include "SDL3/SDL.h"
 #include <stdexcept>
 #include <vector>
-
 #include "display.h"
 #include "utils.h"
 

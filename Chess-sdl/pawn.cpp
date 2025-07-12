@@ -36,13 +36,13 @@ const std::vector<square*> pawn::get_possible_moves(const int x, const int y, sq
 
 	if (color_ == color::white)
 	{
-		square_in_front = y + 1;
-		two_squares_in_front = y + 2;
+		square_in_front = y - 1;
+		two_squares_in_front = y - 2;
 	}
 	else
 	{
-		square_in_front = y - 1;
-		two_squares_in_front = y - 2;
+		square_in_front = y + 1;
+		two_squares_in_front = y + 2;
 	}
 
 	if (!board[x][square_in_front]->get_piece()) {
