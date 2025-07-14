@@ -1,6 +1,6 @@
 # Chess-sdl
 This a a chess game made in cpp with the sdl3 library. I decided to make this project to progress in cpp, getting a better understanding of the language.
-I have made a simillar project for my middle-school's final year project, [Auto-Mate]([https://chromewebstore.google.com/detail/content-manager/lobbohngjkkghmganebnahlfajlahkic](https://github.com/DawidSac24/AutoMate)). It's an automatic chessboard with a mechanism similar to 3d printers. Since i wanted to code a min-max algorithm myself but didn't have time, i decided to remake a chess game in cpp. I wanted to make it easier to showcase and to code (since the initial project was made on arduino).
+I have made a simillar project for my middle-school's final year project, [Auto Mate]([https://chromewebstore.google.com/detail/content-manager/lobbohngjkkghmganebnahlfajlahkic](https://github.com/DawidSac24/AutoMate)). It's an automatic chessboard with a mechanism similar to 3d printers. Since i wanted to code a min-max algorithm myself but didn't have time, i decided to remake a chess game in cpp. I wanted to make it easier to showcase and to code (since the initial project was made on arduino).
 
 # How to download
 You can clone the project and check the [sdl library installation](https://github.com/libsdl-org/SDL/blob/main/INSTALL.md) tutorial (i use the visual studio method, making the implementation temporary for now)
