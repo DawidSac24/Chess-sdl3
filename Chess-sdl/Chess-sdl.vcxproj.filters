@@ -42,6 +42,9 @@
     <ClCompile Include="pawn.cpp">
       <Filter>Source Files\pieces</Filter>
     </ClCompile>
+    <ClCompile Include="rook.cpp">
+      <Filter>Source Files\pieces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="display.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="texture_paths.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rook.h">
+      <Filter>Header Files\pieces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

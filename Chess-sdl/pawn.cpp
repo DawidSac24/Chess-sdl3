@@ -1,7 +1,5 @@
 #include "pawn.h"
 
-#include <iostream>
-
 pawn::pawn(color color)
 	: piece(color, color == color::white ? 1 : -1)
 {
@@ -21,51 +19,54 @@ const char* pawn::to_string()
 	{
 		return "White Pawn";
 	}
-	else
-	{
-		return "Black Pawn";
-	}
+	return "Black Pawn";
 }
 
-const std::vector<square*> pawn::get_possible_moves(const int x, const int y, square* const board[8][8]) const
+const std::vector<square*> pawn::get_possible_moves(const int file, const int rank, square* const board[8][8]) const
 {
 	std::vector<square*> possible_moves;
 
-	int square_in_front;
-	int two_squares_in_front;
+	int forward;
+	int two_steps_forward;
 
 	if (color_ == color::white)
 	{
-		square_in_front = y - 1;
-		two_squares_in_front = y - 2;
+		forward = rank + 1;
+		two_steps_forward = rank + 2;
 	}
 	else
 	{
-		square_in_front = y + 1;
-		two_squares_in_front = y + 2;
+		forward = rank - 1;
+		two_steps_forward = rank - 2;
 	}
 
-	if (!board[x][square_in_front]->get_piece()) {
-		possible_moves.push_back(board[x][square_in_front]);
+	if (!board[file][forward]->get_piece()) {
+		possible_moves.push_back(board[file][forward]);
 		if (!has_moved()) {
-			if (!board[x][two_squares_in_front]->get_piece()) {
-				possible_moves.push_back(board[x][two_squares_in_front]);
+			if (!board[file][two_steps_forward]->get_piece()) {
+				possible_moves.push_back(board[file][two_steps_forward]);
 			}
 		}
 	}
-	if (board[x + 1][square_in_front]->get_piece()) {
-		if (board[x + 1][square_in_front]->get_piece()->get_color() != board[x][y]->get_piece()->get_color())
-		{
-			possible_moves.push_back(board[x + 1][square_in_front]);
-		}
-	}
-	if (board[x - 1][square_in_front]->get_piece()) {
 
-		if (board[x - 1][square_in_front]->get_piece()->get_color() != board[x][y]->get_piece()->get_color())
-		{
-			possible_moves.push_back(board[x - 1][square_in_front]);
+	if (file != 7) {
+		if (board[file + 1][forward]->get_piece()) {
+			if (board[file + 1][forward]->get_piece()->get_color() != board[file][rank]->get_piece()->get_color())
+			{
+				possible_moves.push_back(board[file + 1][forward]);
+			}
 		}
 	}
+	if (file != 0) {
+		if (board[file - 1][forward]->get_piece()) {
+
+			if (board[file - 1][forward]->get_piece()->get_color() != board[file][rank]->get_piece()->get_color())
+			{
+				possible_moves.push_back(board[file - 1][forward]);
+			}
+		}
+	}
+
 
 	return possible_moves;
 }

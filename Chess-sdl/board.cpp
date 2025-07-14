@@ -1,6 +1,6 @@
-#include "board.h"
+﻿#include "board.h"
 
-#include "pawn.h"
+#include <iostream>
 
 board::board()
 {
@@ -17,7 +17,6 @@ board::~board()
 		}
 	}
 }
-
 
 void board::render_board_texture()
 {
@@ -52,6 +51,40 @@ square* board::get_square(const int x, const int y) const
 	return board_[x][y];
 }
 
+coordinates board::get_coordinates(const int x, const int y) const
+{
+	coordinates result = { -1, -1 };
+	const int inner_left = static_cast<int>(x_) + offset_;
+	const int inner_top = static_cast<int>(y_) + offset_;
+	const int inner_size = size * square_size_;           // 8 squares wide
+
+	// Reject anything outside the grid *strictly* (no ≤)
+	if (x < inner_left || x >= inner_left + inner_size ||
+		y < inner_top || y >= inner_top + inner_size)
+	{
+		return result;
+	}
+
+	const int file = (x - inner_left) / square_size_;   // 0 … 7
+	const int rank = 8 - (y - inner_top) / square_size_;
+
+	result = { file ,rank };
+
+	return result;
+}
+
+raw_pos board::get_raw_position(const int file, const int rank) const
+{
+	const int inner_left = static_cast<int>(x_) + offset_;
+	const int inner_top = static_cast<int>(y_) + offset_;
+
+	const float x = file * square_size_ + inner_left;
+	const float y = (7 - rank) * square_size_ + inner_top;
+	const raw_pos result = { x , y };
+
+	return result;
+}
+
 void board::render_all_textures()
 {
 	render_board_texture();
@@ -65,8 +98,6 @@ void board::render_all_textures()
 	}
 	if (selected_square_)
 	{
-		SDL_SetRenderDrawBlendMode(display_->get_renderer(), SDL_BLENDMODE_BLEND);
-		SDL_SetRenderDrawColor(display_->get_renderer(), 255, 255, 0, 128); // Semi-transparent yellow
 
 		show_possible_moves(get_possible_moves(selected_square_->get_x(), selected_square_->get_y()));
 
@@ -77,9 +108,9 @@ void board::render_all_textures()
 
 void board::setup_squares()
 {
-	for (int i = 0; i < size; i++)
+	for (int i = size - 1; i >= 0; i--)
 	{
-		for (int j = 0; j < size; ++j)
+		for (int j = size - 1; j >= 0; j--)
 		{
 			board_[i][j] = new square(i, j);
 		}
@@ -88,14 +119,15 @@ void board::setup_squares()
 
 void board::setup_pieces()
 {
-	for (int i = 0; i < size; ++i)
+	for (int i = size - 1; i >= 0; i--)
 	{
-		board_[i][6]->set_piece(std::make_unique<pawn>(color::white));
+		board_[i][1]->set_piece(std::make_unique<pawn>(color::white));
 	}
-	for (int i = 0; i < size; ++i)
+	for (int i = size - 1; i >= 0; i--)
 	{
-		board_[i][1]->set_piece(std::make_unique<pawn>(color::black));
+		board_[i][6]->set_piece(std::make_unique<pawn>(color::black));
 	}
+	board_[0][0]->set_piece(std::make_unique<rook>(color::white));
 }
 
 std::vector<square*> board::get_possible_moves(const int x, const int y) const
@@ -114,9 +146,9 @@ std::vector<square*> board::get_possible_moves(const int x, const int y) const
 	return board_[x][y]->get_piece()->get_possible_moves(x, y, board_);
 }
 
-bool board::select_src_sqr(const int x, const int y)
+bool board::select_src_sqr(const coordinates coordinates)
 {
-	square* selected_square = get_square(x, y);
+	square* selected_square = get_square(coordinates.file, coordinates.rank);
 
 	if (selected_square && selected_square->get_piece())
 	{
@@ -126,9 +158,9 @@ bool board::select_src_sqr(const int x, const int y)
 	return false;
 }
 
-bool board::select_dst_sqr(const int x, const int y)
+bool board::select_dst_sqr(const coordinates coordinates)
 {
-	if (move_piece(selected_square_->get_x(), selected_square_->get_y(), x, y))
+	if (move_piece(selected_square_->get_x(), selected_square_->get_y(), coordinates.file, coordinates.rank))
 	{
 		selected_square_ = nullptr;
 		return true;
@@ -145,6 +177,7 @@ bool board::move_piece(const int src_x, const int src_y, const int dest_x, const
 
 	for (const square* square : possible_moves)
 	{
+		std::cout << "\n possible move square.x = " << square->get_x() << "\n possible move square.y = " << square->get_y();
 		if (square == dest_square)
 		{
 			board_[dest_x][dest_y]->move_piece_from(*board_[src_x][src_y]);
@@ -156,12 +189,24 @@ bool board::move_piece(const int src_x, const int src_y, const int dest_x, const
 
 void board::show_possible_moves(const std::vector<square*> squares) const
 {
+	SDL_SetRenderDrawBlendMode(display_->get_renderer(), SDL_BLENDMODE_BLEND);
+
 	for (const square* square : squares)
 	{
-		const float x = static_cast<float>(square->get_x());
-		const float y = static_cast<float>(square->get_y());
+		if (square->get_piece())
+		{
+			SDL_SetRenderDrawColor(display_->get_renderer(), 255, 0, 0, 128); // Semi-transparent red
+		}
+		else
+		{
+			SDL_SetRenderDrawColor(display_->get_renderer(), 255, 255, 0, 128); // Semi-transparent yellow
+		}
+		const float file = static_cast<float>(square->get_x());
+		const float rank = static_cast<float>(square->get_y());
 
-		SDL_FRect rect = { x * square_size_ + 256, y * square_size_ + 96, square_size_, square_size_ };
+		const raw_pos raw_pos = get_raw_position(file, rank);
+
+		SDL_FRect rect = { raw_pos.x , raw_pos.y , square_size_, square_size_ };
 
 		SDL_RenderFillRect(display_->get_renderer(), &rect);
 	}

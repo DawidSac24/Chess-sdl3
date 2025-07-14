@@ -24,8 +24,8 @@ public:
 
 	~display();
 
-	display(display& other) = delete;
-	void operator=(const display&) = delete;
+	inline display(display& other) = delete;
+	inline void operator=(const display&) = delete;
 
 	SDL_Renderer* get_renderer() const;
 

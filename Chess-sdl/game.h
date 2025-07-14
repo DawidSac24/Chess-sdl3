@@ -1,6 +1,6 @@
 #pragma once
-#include "display.h"
-#include "board.h"
+#include "./display.h"
+#include "./board.h"
 
 enum game_state
 {
@@ -27,14 +27,14 @@ private:
 public:
 	static game* get_instance();
 
-	explicit game(display& other) = delete;
-	void operator=(const game&) = delete;
+	inline explicit game(display& other) = delete;
+	inline void operator=(const game&) = delete;
 
-	game_state get_state() const { return game_state_; }
+	inline game_state get_state() const { return game_state_; }
 
 	void lunch_game();
 	void handle_event(const SDL_Event& event);
-	void handle_piece_movement(const int x, const int y);
+	void handle_piece_movement(const coordinates coordinates);
 
 	void render_all_textures();
 };
