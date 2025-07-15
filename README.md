@@ -12,10 +12,10 @@ Contributions are more than welcome! Whether you’ve found a bug, have a featur
 I decided to make the chess game with sdl because i saw that it is possible to easily compile to webassembly, wich would allow me to implement it on a website (my portfolio for exemple).
 
 # TODO
-- [ ] Repair the crash on certein squares movement with the rook
+- [x] Repair the crash on certein squares movement with the rook
 - [ ] add a menu
 - [ ] add the rest of the pieces :
-  - [ ] knight
+  - [x] knight
   - [ ] bishop
   - [ ] queen
   - [ ] king
