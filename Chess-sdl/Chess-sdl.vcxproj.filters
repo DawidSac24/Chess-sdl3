@@ -45,6 +45,9 @@
     <ClCompile Include="rook.cpp">
       <Filter>Source Files\pieces</Filter>
     </ClCompile>
+    <ClCompile Include="knight.cpp">
+      <Filter>Source Files\pieces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="display.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rook.h">
+      <Filter>Header Files\pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="knight.h">
       <Filter>Header Files\pieces</Filter>
     </ClInclude>
   </ItemGroup>

@@ -20,6 +20,7 @@ game::game() : board_rect_(board_.get_rect())
 void game::lunch_game()
 {
 	render_all_textures();
+	players_turn_ = color::white;
 	game_state_ = ongoing;
 }
 
@@ -40,7 +41,7 @@ void game::handle_event(const SDL_Event& e)
 	if (board_.on_board(coordinates))
 	{
 		std::cout << "\n file: " << coordinates.file << "\n rank: " << coordinates.rank << std::endl;
-		handle_piece_movement(coordinates);   // pass ints, not floats
+		handle_piece_movement(coordinates);
 	}
 
 	render_all_textures();
@@ -52,16 +53,20 @@ void game::handle_piece_movement(const coordinates coordinates)
 
 	if (!selected_square)
 	{
-		if (!board_.select_src_sqr(coordinates))
+		if (!board_.select_src_sqr(coordinates, players_turn_))
 		{
-			std::cout << "failed to select piece" << std::endl;
+			std::cout << "failed to select piece";
 		}
 	}
 	else
 	{
-		if (!board_.select_dst_sqr(coordinates))
+		if (board_.select_dst_sqr(coordinates))
 		{
-			std::cout << "failed to move piece" << std::endl;
+			switch_players_turn();
+		}
+		else
+		{
+			std::cout << "failed to move piece";
 			board_.unselect_square();
 		}
 	}

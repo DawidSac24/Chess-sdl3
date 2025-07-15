@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "board.h"
 #include "piece.h"
 
 class square

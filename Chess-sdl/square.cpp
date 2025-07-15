@@ -2,11 +2,9 @@
 
 square::square(const int x, const int y) : x_(x), y_(y)
 {
-	// adding the board's starting position with it's offset and 
-	float position_x = 256 + x * length_;
-	float position_y = 96 + (7 - y) * length_;
+	raw_pos raw_pos = board::get_raw_position(x, y);
 
-	rect_ = { position_x, position_y, length_, length_ };
+	rect_ = { raw_pos.x, raw_pos.y, length_, length_ };
 }
 
 bool square::render_texture() const

@@ -3,11 +3,13 @@
 #include "SDL3/SDL.h"
 #include <stdexcept>
 #include <vector>
+#include <iostream>
 #include "texture_paths.h"
 #include "display.h"
 
 #include "pawn.h"
 #include "rook.h"
+#include "knight.h"
 
 class square;
 
@@ -34,15 +36,15 @@ private:
 
 	display* display_ = display::get_instance();
 
-	float height_ = 784;
-	float width_ = 784;
-	float x_ = 248;
-	float y_ = 88;
-	int offset_ = 8;
-	float square_size_ = 96;
+	static constexpr float height = 784;
+	static constexpr float width = 784;
+	static constexpr float x = 248;
+	static constexpr float y = 88;
+	static constexpr int offset = 8;
+	static constexpr float square_size = 96;
 
 	SDL_Texture* texture_;
-	SDL_FRect rect_ = { x_,y_, height_, width_ };
+	SDL_FRect rect_ = { x,y, height, width };
 	const char* texture_path_ = board_texture;
 
 	void render_board_texture();
@@ -67,13 +69,13 @@ public:
 	inline 	square* get_selected_sqr() const { return selected_square_; }
 	inline void unselect_square() { selected_square_ = nullptr; }
 	SDL_FRect* get_rect() { return &rect_; }
-	coordinates get_coordinates(const int x, const int y) const;
-	raw_pos get_raw_position(const int file, const int rank) const;
+	static coordinates get_coordinates(const int x, const int y);
+	static raw_pos get_raw_position(const int file, const int rank);
 
 	void render_all_textures();
 
 	std::vector<square*> get_possible_moves(const int x, const int y) const;
-	bool select_src_sqr(const coordinates coordinates);
+	bool select_src_sqr(const coordinates coordinates, color players_turn);
 	bool select_dst_sqr(const coordinates coordinates);
 	bool move_piece(const int src_x, const int src_y, const int dest_x, const int dest_y) const;
 	void show_possible_moves(const std::vector<square*> squares) const;

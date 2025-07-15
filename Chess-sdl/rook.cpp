@@ -1,6 +1,5 @@
 #include "rook.h"
 
-#include <iostream>
 
 rook::rook(color color)
 	: piece(color, color == color::white ? 5 : -5)
@@ -13,8 +12,6 @@ rook::rook(color color)
 	{
 		texture_path_ = black_rook_texture;
 	}
-
-	std::cout << "rook initialized";
 }
 
 const char* rook::to_string()
@@ -39,21 +36,21 @@ const std::vector<square*> rook::get_possible_moves(const int file, const int ra
 
 	for (int i = 0; i < 4; ++i) {
 		int dx = directions[i][0];
-		int dy = directions[0][i];
+		int dy = directions[i][1];
 
 		int x = file + dx;
 		int y = rank + dy;
 
 		while (board::on_board(x, y)) {
-			const square* target = board[y][x];
+			const square* target = board[x][y];
 			const piece* occupant = target->get_piece();
 
 			if (!occupant) {
-				moves.emplace_back(board[y][x]);
+				moves.emplace_back(board[x][y]);
 			}
 			else {
 				if (occupant->get_color() != this->get_color()) {
-					moves.emplace_back(board[y][x]);
+					moves.emplace_back(board[x][y]);
 				}
 				break;
 			}

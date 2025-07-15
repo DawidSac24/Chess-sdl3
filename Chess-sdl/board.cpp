@@ -1,7 +1,5 @@
 ﻿#include "board.h"
 
-#include <iostream>
-
 board::board()
 {
 	setup_squares();
@@ -51,38 +49,37 @@ square* board::get_square(const int x, const int y) const
 	return board_[x][y];
 }
 
-coordinates board::get_coordinates(const int x, const int y) const
+coordinates board::get_coordinates(const int raw_x, const int raw_y)
 {
 	coordinates result = { -1, -1 };
-	const int inner_left = static_cast<int>(x_) + offset_;
-	const int inner_top = static_cast<int>(y_) + offset_;
-	const int inner_size = size * square_size_;           // 8 squares wide
+	const int inner_left = static_cast<int>(x) + offset;
+	const int inner_top = static_cast<int>(y) + offset;
+	const int inner_size = size * square_size;           // 8 squares wide
 
 	// Reject anything outside the grid *strictly* (no ≤)
-	if (x < inner_left || x >= inner_left + inner_size ||
-		y < inner_top || y >= inner_top + inner_size)
+	if (raw_x < inner_left || raw_x >= inner_left + inner_size ||
+		raw_y < inner_top || raw_y >= inner_top + inner_size)
 	{
 		return result;
 	}
 
-	const int file = (x - inner_left) / square_size_;   // 0 … 7
-	const int rank = 8 - (y - inner_top) / square_size_;
+	const int file = (raw_x - inner_left) / square_size;   // 0 … 7
+	const int rank = 8 - (raw_y - inner_top) / square_size;
 
 	result = { file ,rank };
 
 	return result;
 }
 
-raw_pos board::get_raw_position(const int file, const int rank) const
+raw_pos board::get_raw_position(const int file, const int rank)
 {
-	const int inner_left = static_cast<int>(x_) + offset_;
-	const int inner_top = static_cast<int>(y_) + offset_;
+	const int inner_left = static_cast<int>(x) + offset;
+	const int inner_top = static_cast<int>(y) + offset;
 
-	const float x = file * square_size_ + inner_left;
-	const float y = (7 - rank) * square_size_ + inner_top;
-	const raw_pos result = { x , y };
+	const float px = file * square_size + inner_left;
+	const float py = (7 - rank) * square_size + inner_top;
 
-	return result;
+	return { px, py };
 }
 
 void board::render_all_textures()
@@ -123,11 +120,19 @@ void board::setup_pieces()
 	{
 		board_[i][1]->set_piece(std::make_unique<pawn>(color::white));
 	}
+	board_[0][0]->set_piece(std::make_unique<rook>(color::white));
+	board_[7][0]->set_piece(std::make_unique<rook>(color::white));
+
+	board_[1][0]->set_piece(std::make_unique<knight>(color::white));
+	board_[6][0]->set_piece(std::make_unique<knight>(color::white));
+
 	for (int i = size - 1; i >= 0; i--)
 	{
 		board_[i][6]->set_piece(std::make_unique<pawn>(color::black));
 	}
-	board_[0][0]->set_piece(std::make_unique<rook>(color::white));
+	board_[0][7]->set_piece(std::make_unique<rook>(color::black));
+	board_[7][7]->set_piece(std::make_unique<rook>(color::black));
+
 }
 
 std::vector<square*> board::get_possible_moves(const int x, const int y) const
@@ -146,11 +151,11 @@ std::vector<square*> board::get_possible_moves(const int x, const int y) const
 	return board_[x][y]->get_piece()->get_possible_moves(x, y, board_);
 }
 
-bool board::select_src_sqr(const coordinates coordinates)
+bool board::select_src_sqr(const coordinates coordinates, color players_turn)
 {
 	square* selected_square = get_square(coordinates.file, coordinates.rank);
 
-	if (selected_square && selected_square->get_piece())
+	if (selected_square && selected_square->get_piece()->get_color() == players_turn)
 	{
 		selected_square_ = selected_square;
 		return true;
@@ -206,7 +211,7 @@ void board::show_possible_moves(const std::vector<square*> squares) const
 
 		const raw_pos raw_pos = get_raw_position(file, rank);
 
-		SDL_FRect rect = { raw_pos.x , raw_pos.y , square_size_, square_size_ };
+		SDL_FRect rect = { raw_pos.x , raw_pos.y , square_size, square_size };
 
 		SDL_RenderFillRect(display_->get_renderer(), &rect);
 	}
