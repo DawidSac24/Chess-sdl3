@@ -2,7 +2,6 @@
 
 #include "board.h";
 #include "piece.h"
-#include "texture_paths.h"
 
 class knight : public piece
 {

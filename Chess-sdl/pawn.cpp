@@ -5,11 +5,11 @@ pawn::pawn(color color)
 {
 	if (color == color::white)
 	{
-		texture_path_ = white_pawn_texture;
+		texture_path_ = "./assets/pieces/white-pawn.png";
 	}
 	else
 	{
-		texture_path_ = black_pawn_texture;
+		texture_path_ = "./assets/pieces/black-pawn.png";
 	}
 }
 

@@ -3,7 +3,6 @@
 #include "board.h"
 #include "piece.h"
 #include "square.h"
-#include "texture_paths.h"
 
 class rook : public piece
 {

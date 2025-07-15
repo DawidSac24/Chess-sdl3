@@ -48,6 +48,12 @@
     <ClCompile Include="knight.cpp">
       <Filter>Source Files\pieces</Filter>
     </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bishop.cpp">
+      <Filter>Source Files\pieces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="display.h">
@@ -71,13 +77,16 @@
     <ClInclude Include="pawn.h">
       <Filter>Header Files\pieces</Filter>
     </ClInclude>
-    <ClInclude Include="texture_paths.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rook.h">
       <Filter>Header Files\pieces</Filter>
     </ClInclude>
     <ClInclude Include="knight.h">
+      <Filter>Header Files\pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bishop.h">
       <Filter>Header Files\pieces</Filter>
     </ClInclude>
   </ItemGroup>

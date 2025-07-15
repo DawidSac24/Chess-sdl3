@@ -116,7 +116,7 @@ void board::setup_squares()
 
 void board::setup_pieces()
 {
-	for (int i = size - 1; i >= 0; i--)
+	/*for (int i = size - 1; i >= 0; i--)
 	{
 		board_[i][1]->set_piece(std::make_unique<pawn>(color::white));
 	}
@@ -124,7 +124,10 @@ void board::setup_pieces()
 	board_[7][0]->set_piece(std::make_unique<rook>(color::white));
 
 	board_[1][0]->set_piece(std::make_unique<knight>(color::white));
-	board_[6][0]->set_piece(std::make_unique<knight>(color::white));
+	board_[6][0]->set_piece(std::make_unique<knight>(color::white));*/
+
+	board_[2][0]->set_piece(std::make_unique<bishop>(color::white));
+	board_[5][0]->set_piece(std::make_unique<bishop>(color::white));
 
 	for (int i = size - 1; i >= 0; i--)
 	{
@@ -133,6 +136,11 @@ void board::setup_pieces()
 	board_[0][7]->set_piece(std::make_unique<rook>(color::black));
 	board_[7][7]->set_piece(std::make_unique<rook>(color::black));
 
+	board_[1][7]->set_piece(std::make_unique<knight>(color::black));
+	board_[6][7]->set_piece(std::make_unique<knight>(color::black));
+
+	board_[2][7]->set_piece(std::make_unique<bishop>(color::black));
+	board_[5][7]->set_piece(std::make_unique<bishop>(color::black));
 }
 
 std::vector<square*> board::get_possible_moves(const int x, const int y) const
@@ -155,7 +163,7 @@ bool board::select_src_sqr(const coordinates coordinates, color players_turn)
 {
 	square* selected_square = get_square(coordinates.file, coordinates.rank);
 
-	if (selected_square && selected_square->get_piece()->get_color() == players_turn)
+	if (selected_square && selected_square->get_piece()/* && selected_square->get_piece()->get_color() == players_turn*/)
 	{
 		selected_square_ = selected_square;
 		return true;
@@ -192,7 +200,7 @@ bool board::move_piece(const int src_x, const int src_y, const int dest_x, const
 	return false;
 }
 
-void board::show_possible_moves(const std::vector<square*> squares) const
+void board::show_possible_moves(const std::vector<square*>& squares) const
 {
 	SDL_SetRenderDrawBlendMode(display_->get_renderer(), SDL_BLENDMODE_BLEND);
 

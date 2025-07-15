@@ -4,12 +4,12 @@
 #include <stdexcept>
 #include <vector>
 #include <iostream>
-#include "texture_paths.h"
 #include "display.h"
 
 #include "pawn.h"
 #include "rook.h"
 #include "knight.h"
+#include "bishop.h"
 
 class square;
 
@@ -38,14 +38,14 @@ private:
 
 	static constexpr float height = 784;
 	static constexpr float width = 784;
-	static constexpr float x = 248;
+	static constexpr float x = 100;
 	static constexpr float y = 88;
 	static constexpr int offset = 8;
 	static constexpr float square_size = 96;
 
 	SDL_Texture* texture_;
 	SDL_FRect rect_ = { x,y, height, width };
-	const char* texture_path_ = board_texture;
+	const char* texture_path_ = "./assets/board.png";
 
 	void render_board_texture();
 
@@ -55,12 +55,12 @@ public:
 	board();
 	~board();
 
-	static inline bool on_board(int x, int y) noexcept
+	static inline bool on_board(const int x, const int y) noexcept
 	{
 		return x >= 0 && x < 8 && y >= 0 && y < 8;
 	}
 
-	static inline bool on_board(coordinates coordinates) noexcept
+	static inline bool on_board(const coordinates coordinates) noexcept
 	{
 		return on_board(coordinates.file, coordinates.rank);
 	}
@@ -78,6 +78,5 @@ public:
 	bool select_src_sqr(const coordinates coordinates, color players_turn);
 	bool select_dst_sqr(const coordinates coordinates);
 	bool move_piece(const int src_x, const int src_y, const int dest_x, const int dest_y) const;
-	void show_possible_moves(const std::vector<square*> squares) const;
+	void show_possible_moves(const std::vector<square*>& squares) const;
 };
-

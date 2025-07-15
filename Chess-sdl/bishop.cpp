@@ -1,37 +1,36 @@
-#include "rook.h"
+#include "bishop.h"
 
-
-rook::rook(color color)
+bishop::bishop(color color)
 	: piece(color, color == color::white ? 5 : -5)
 {
 	if (color == color::white)
 	{
-		texture_path_ = "./assets/pieces/white-rook.png";
+		texture_path_ = "./assets/pieces/white-bishop.png";
 	}
 	else
 	{
-		texture_path_ = "./assets/pieces/black-rook.png";
+		texture_path_ = "./assets/pieces/black-bishop.png";
 	}
 }
 
-const char* rook::to_string()
+const char* bishop::to_string()
 {
 	if (color_ == color::white)
 	{
-		return "White Rook";
+		return "White Bishop";
 	}
-	return "Black Rook";
+	return "Black Bishop";
 }
 
-const std::vector<square*> rook::get_possible_moves(const int file, const int rank, square* const board[8][8]) const
+const std::vector<square*> bishop::get_possible_moves(const int file, const int rank, square* const board[8][8]) const
 {
 	std::vector<square*> moves;
 
 	const int directions[4][2] = {
-		{ 0,  1}, // Up
-		{ 0, -1}, // Down
-		{ 1,  0}, // Right
-		{-1,  0}  // Left
+		{ 1,  1}, // Up-Right
+		{ 1, -1}, // Up-Left
+		{ -1,  1}, // Down-Right
+		{-1,  -1}  // Down-Left
 	};
 
 	for (int i = 0; i < 4; ++i) {

@@ -4,11 +4,11 @@ knight::knight(color color) : piece(color, color == color::white ? 3 : -3)
 {
 	if (color == color::white)
 	{
-		texture_path_ = white_knight_texture;
+		texture_path_ = "./assets/pieces/white-knight.png";
 	}
 	else
 	{
-		texture_path_ = black_knight_texture;
+		texture_path_ = "./assets/pieces/black-knight.png";
 	}
 }
 
