@@ -5,6 +5,14 @@ piece::piece(const color color, const int value) :
 {
 }
 
+piece::~piece()
+{
+	if (texture_)
+	{
+		SDL_DestroyTexture(texture_);
+	}
+}
+
 SDL_Texture* piece::get_texture()
 {
 	if (texture_ == nullptr)

@@ -13,18 +13,6 @@
 
 class square;
 
-struct coordinates
-{
-	int file;
-	int rank;
-};
-
-struct raw_pos
-{
-	float x;
-	float y;
-};
-
 class board
 {
 private:
@@ -38,13 +26,12 @@ private:
 
 	static constexpr float height = 784;
 	static constexpr float width = 784;
-	static constexpr float x = 100;
-	static constexpr float y = 88;
-	static constexpr int offset = 8;
+	static constexpr raw_pos b_raw_pos = { 100, 88 };
+	static constexpr int b_offset = 8;
 	static constexpr float square_size = 96;
 
 	SDL_Texture* texture_;
-	SDL_FRect rect_ = { x,y, height, width };
+	SDL_FRect rect_ = { b_raw_pos.x,b_raw_pos.y, height, width };
 	const char* texture_path_ = "./assets/board.png";
 
 	void render_board_texture();

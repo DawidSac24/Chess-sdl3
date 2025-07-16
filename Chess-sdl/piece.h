@@ -22,7 +22,7 @@ protected:
 public:
 	piece(const color color, const int value);
 
-	virtual ~piece() = default;
+	virtual ~piece();
 
 	color get_color() const { return color_; }
 	int get_value() const { return value_; }

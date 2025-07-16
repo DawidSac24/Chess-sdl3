@@ -52,8 +52,8 @@ square* board::get_square(const int x, const int y) const
 coordinates board::get_coordinates(const int raw_x, const int raw_y)
 {
 	coordinates result = { -1, -1 };
-	const int inner_left = static_cast<int>(x) + offset;
-	const int inner_top = static_cast<int>(y) + offset;
+	const int inner_left = static_cast<int>(b_raw_pos.x) + b_offset;
+	const int inner_top = static_cast<int>(b_raw_pos.y) + b_offset;
 	const int inner_size = size * square_size;           // 8 squares wide
 
 	// Reject anything outside the grid *strictly* (no ≤)
@@ -73,8 +73,8 @@ coordinates board::get_coordinates(const int raw_x, const int raw_y)
 
 raw_pos board::get_raw_position(const int file, const int rank)
 {
-	const int inner_left = static_cast<int>(x) + offset;
-	const int inner_top = static_cast<int>(y) + offset;
+	const int inner_left = static_cast<int>(b_raw_pos.x) + b_offset;
+	const int inner_top = static_cast<int>(b_raw_pos.y) + b_offset;
 
 	const float px = file * square_size + inner_left;
 	const float py = (7 - rank) * square_size + inner_top;
@@ -116,7 +116,7 @@ void board::setup_squares()
 
 void board::setup_pieces()
 {
-	/*for (int i = size - 1; i >= 0; i--)
+	for (int i = size - 1; i >= 0; i--)
 	{
 		board_[i][1]->set_piece(std::make_unique<pawn>(color::white));
 	}
@@ -124,7 +124,7 @@ void board::setup_pieces()
 	board_[7][0]->set_piece(std::make_unique<rook>(color::white));
 
 	board_[1][0]->set_piece(std::make_unique<knight>(color::white));
-	board_[6][0]->set_piece(std::make_unique<knight>(color::white));*/
+	board_[6][0]->set_piece(std::make_unique<knight>(color::white));
 
 	board_[2][0]->set_piece(std::make_unique<bishop>(color::white));
 	board_[5][0]->set_piece(std::make_unique<bishop>(color::white));

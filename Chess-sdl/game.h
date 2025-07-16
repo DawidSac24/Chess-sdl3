@@ -16,12 +16,10 @@ private:
 	static game* instance_;
 
 	game_state game_state_;
-	color players_turn_;
+	color players_turn_ = color::white;
 
 	board board_;
 	SDL_FRect* board_rect_;
-
-	float square_size_ = 96;
 
 	display* display_ = display::get_instance();
 

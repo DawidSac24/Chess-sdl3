@@ -2,7 +2,7 @@
 
 square::square(const int x, const int y) : x_(x), y_(y)
 {
-	raw_pos raw_pos = board::get_raw_position(x, y);
+	const raw_pos raw_pos = board::get_raw_position(x, y);
 
 	rect_ = { raw_pos.x, raw_pos.y, length_, length_ };
 }

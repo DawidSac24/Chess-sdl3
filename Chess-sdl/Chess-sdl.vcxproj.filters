@@ -13,10 +13,16 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\pieces">
+    <Filter Include="Header Files\game">
+      <UniqueIdentifier>{416672c1-06b4-402e-a8cb-f72a20149757}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\pieces">
       <UniqueIdentifier>{82487b14-51e9-41cd-9b24-9a73d0477533}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\pieces">
+    <Filter Include="Source Files\game">
+      <UniqueIdentifier>{895080be-a3ca-46d8-b17d-18f4edf82392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\pieces">
       <UniqueIdentifier>{cdbfe9d2-7ff2-4bc1-90b6-3d15ce96c7f6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -27,67 +33,73 @@
     <ClCompile Include="display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="board.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="square.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="piece.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="pawn.cpp">
-      <Filter>Source Files\pieces</Filter>
+      <Filter>Source Files\game\pieces</Filter>
     </ClCompile>
     <ClCompile Include="rook.cpp">
-      <Filter>Source Files\pieces</Filter>
+      <Filter>Source Files\game\pieces</Filter>
     </ClCompile>
     <ClCompile Include="knight.cpp">
-      <Filter>Source Files\pieces</Filter>
+      <Filter>Source Files\game\pieces</Filter>
     </ClCompile>
     <ClCompile Include="menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="bishop.cpp">
-      <Filter>Source Files\pieces</Filter>
+      <Filter>Source Files\game\pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="board.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="square.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="piece.cpp">
+      <Filter>Source Files\game\pieces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="board.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="square.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="piece.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pawn.h">
-      <Filter>Header Files\pieces</Filter>
+      <Filter>Header Files\game\pieces</Filter>
     </ClInclude>
     <ClInclude Include="rook.h">
-      <Filter>Header Files\pieces</Filter>
+      <Filter>Header Files\game\pieces</Filter>
     </ClInclude>
     <ClInclude Include="knight.h">
-      <Filter>Header Files\pieces</Filter>
+      <Filter>Header Files\game\pieces</Filter>
     </ClInclude>
     <ClInclude Include="menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bishop.h">
-      <Filter>Header Files\pieces</Filter>
+      <Filter>Header Files\game\pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="board.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="square.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="piece.h">
+      <Filter>Header Files\game\pieces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

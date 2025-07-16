@@ -3,6 +3,17 @@
 #include "SDL3/SDL.h"
 #include "SDL3_image/SDL_image.h"
 
+struct coordinates
+{
+	int file;
+	int rank;
+};
+
+struct raw_pos
+{
+	float x;
+	float y;
+};
 
 class square;
 

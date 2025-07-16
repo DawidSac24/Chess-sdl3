@@ -20,14 +20,12 @@ game::game() : board_rect_(board_.get_rect())
 void game::lunch_game()
 {
 	render_all_textures();
-	players_turn_ = color::white;
 	game_state_ = ongoing;
 }
 
 void game::handle_event(const SDL_Event& e)
 {
-	if (e.type != SDL_EVENT_MOUSE_BUTTON_DOWN ||
-		e.button.button != SDL_BUTTON_LEFT)
+	if (e.type != SDL_EVENT_MOUSE_BUTTON_DOWN || e.button.button != SDL_BUTTON_LEFT)
 		return;
 
 	// Raw mouse position
