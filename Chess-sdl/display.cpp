@@ -62,4 +62,3 @@ SDL_Texture* display::load_texture(const char* path) const
 
 	return texture;
 }
-

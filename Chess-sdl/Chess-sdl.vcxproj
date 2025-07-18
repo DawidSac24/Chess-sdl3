@@ -71,16 +71,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\majst\Documents\dev-doc\SDL-release-3.2.16\include;C:\Users\majst\Documents\dev-doc\SDL_image-release-3.2.4\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\majst\Documents\dev-doc\SDL-release-3.2.16\include;C:\Users\majst\Documents\dev-doc\SDL_image-release-3.2.4\include;C:\dev\SDL_ttf-release-3.2.2\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\majst\Documents\dev-doc\SDL-release-3.2.16\include;C:\Users\majst\Documents\dev-doc\SDL_image-release-3.2.4\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\majst\Documents\dev-doc\SDL-release-3.2.16\include;C:\Users\majst\Documents\dev-doc\SDL_image-release-3.2.4\include;C:\dev\SDL_ttf-release-3.2.2\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\majst\Documents\dev-doc\SDL-release-3.2.16\include;C:\Users\majst\Documents\dev-doc\SDL_image-release-3.2.4\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\majst\Documents\dev-doc\SDL-release-3.2.16\include;C:\Users\majst\Documents\dev-doc\SDL_image-release-3.2.4\include;C:\dev\SDL_ttf-release-3.2.2\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\majst\Documents\dev-doc\SDL-release-3.2.16\include;C:\Users\majst\Documents\dev-doc\SDL_image-release-3.2.4\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\majst\Documents\dev-doc\SDL-release-3.2.16\include;C:\Users\majst\Documents\dev-doc\SDL_image-release-3.2.4\include;C:\dev\SDL_ttf-release-3.2.2\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -88,8 +88,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>;C:\dev\SDL_image-release-3.2.4\include;C:\dev\SDL-release-3.2.16\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp23</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\dev\SDL_ttf-release-3.2.2\include;;C:\dev\SDL_image-release-3.2.4\include;C:\dev\SDL-release-3.2.16\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -105,8 +105,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>;C:\dev\SDL_image-release-3.2.4\include;C:\dev\SDL-release-3.2.16\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp23</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\dev\SDL_ttf-release-3.2.2\include;;C:\dev\SDL_image-release-3.2.4\include;C:\dev\SDL-release-3.2.16\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,8 +120,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\dev\SDL_image-release-3.2.4\include;C:\dev\SDL-release-3.2.16\include;%(AdditionalIncludeDirectories);C:\dev\SDL_image-release-3.2.4\include;C:\dev\SDL-release-3.2.16\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp23</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\dev\SDL_ttf-release-3.2.2\include;C:\dev\SDL_image-release-3.2.4\include;C:\dev\SDL-release-3.2.16\include;%(AdditionalIncludeDirectories);C:\dev\SDL_image-release-3.2.4\include;C:\dev\SDL-release-3.2.16\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,8 +137,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>;C:\dev\SDL_image-release-3.2.4\include;C:\dev\SDL-release-3.2.16\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp23</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\dev\SDL_ttf-release-3.2.2\include;;C:\dev\SDL_image-release-3.2.4\include;C:\dev\SDL-release-3.2.16\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -193,6 +193,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\..\dev\SDL_image-release-3.2.4\VisualC\SDL_image.vcxproj">
       <Project>{2bd5534e-00e2-4bea-ac96-d9a92ea24696}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\dev\SDL_ttf-release-3.2.2\VisualC\SDL_ttf.vcxproj">
+      <Project>{dddbd07d-dc76-4af6-8d02-3e2deb6ee255}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

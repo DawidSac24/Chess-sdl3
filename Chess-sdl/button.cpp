@@ -2,6 +2,11 @@
 
 button::button(const raw_pos position, const raw_pos size) : position_(position), size_(size)
 {
+	if (!TTF_Init())
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize TTF: %s", SDL_GetError());
+	}
+
 	rect_ = { position.x,position.y, size.x, size.y };
 
 }

@@ -1,6 +1,5 @@
-#include <iostream>
-
 #include "./game.h"
+#include "SDL3_ttf/SDL_ttf.h"
 
 int main(int argc, char* argv[])
 {
@@ -22,6 +21,7 @@ int main(int argc, char* argv[])
 	catch (int error_code) {
 		std::cout << "Error occurred: " << error_code;
 	}
+	TTF_Font* font = TTF_OpenFont("./assets/Varela/Varela-Regular.fon", 12);
 
 	return 0;
 }
